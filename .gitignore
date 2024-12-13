@@ -1,0 +1,13 @@
+/obj
+/bin
+
+/omp_obj
+/omp_bin
+
+/test_obj
+/test_bin
+
+/test_files
+/out_comparison
+
+.vscode
