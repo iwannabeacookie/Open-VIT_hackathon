@@ -6,12 +6,12 @@ BIN_FOLDER := bin
 OBJ_FOLDER := bin/obj
 SRC_FOLDER := src
 
-OMP_BIN_FOLDER := bin/omp
-OMP_OBJ_FOLDER := bin/omp/obj
+OMP_BIN_FOLDER := omp_bin
+OMP_OBJ_FOLDER := omp_bin/obj
 OMP_SRC_FOLDER := omp_src
 
-TEST_BIN_FOLDER := bin/test
-TEST_OBJ_FOLDER := bin/test/obj
+TEST_BIN_FOLDER := test_bin
+TEST_OBJ_FOLDER := test_bin/obj
 TEST_SRC_FOLDER := test_src
 
 
@@ -19,17 +19,9 @@ TEST_SRC_FOLDER := test_src
 all : vit
 
 clean :
-	rm -rf ./$(OBJ_FOLDER)/* ./$(BIN_FOLDER)/* ./$(OMP_OBJ_FOLDER)/* ./$(OMP_BIN_FOLDER)/* \
-		   ./$(TEST_OBJ_FOLDER)/* ./$(TEST_BIN_FOLDER)/* \
-		   ./out_comparison/* ./logs/*
-
-clean_everything :
-	rm -rf ./$(OBJ_FOLDER)/* ./$(BIN_FOLDER)/* ./$(OMP_OBJ_FOLDER)/* ./$(OMP_BIN_FOLDER)/* \
-		   ./$(TEST_OBJ_FOLDER)/* ./$(TEST_BIN_FOLDER)/* ./test_files/* \
-		   ./data/* ./models/* ./out/* ./measures/* \
-		   ./out_comparison/* ./logs/*
-
-vit : % : $(BIN_FOLDER)/%.exe
+	rm -rf ./$(OBJ_FOLDER) ./$(BIN_FOLDER) ./$(OMP_OBJ_FOLDER) ./$(OMP_BIN_FOLDER) \
+		   ./$(TEST_OBJ_FOLDER) ./$(TEST_BIN_FOLDER) \
+		   ./out_comparison ./test_files
 
 
 

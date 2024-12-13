@@ -1,6 +1,6 @@
 # Dataset and model parameters
 export DTASET_FOLDER="data_0" # Path of the dataset folder
-export DTASET_DIM="1" # How many batches use in the selected dataset
+export DTASET_DIM="1" # How many batches to use in the selected dataset
 export MODEL_PATH="model/vit.cvit" # Path of the model file
 
 # Outputs parameters
