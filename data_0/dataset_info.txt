@@ -1,0 +1,7 @@
+Base Dataset: Cifar100
+Dataset Dimension: 1 batch
+Batch Size: 16 pictures
+Channel Dimension: 3
+Picture Height: 16
+Picture Width: 16
+Pixel Representation: float

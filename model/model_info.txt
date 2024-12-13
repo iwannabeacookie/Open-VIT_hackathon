@@ -1,0 +1,19 @@
+img_size: 32 x 32
+patch_size: 8 x 8
+in_chans: 3
+num_classes: 100
+
+global_pool: token
+embed_dim: 512
+depth: 8
+num_heads: 8
+mlp_ratio: 3.0
+
+has_class_token: True
+num_reg_tokens: 0
+num_prefix_tokens: 1
+no_embed_class: False
+use_pos_embed: True
+use_pre_norm: False
+use_fc_norm: False
+dynamic_img_size: False
