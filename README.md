@@ -37,8 +37,7 @@ IMPORTANT: you shall not run these commands directly.
 To run properly, you must first request resources via SLURM. There are two ways to do so:
 ```
 # "Inline"
-srun -N 1 -p boost_usr_prod -A tra24_hckunitn  --reservation=s_tra_hckunitn -t 00:05:00 --gres=gpu:1 run_acc_nsys.sh --profile <your_command_here>
-
+srun -N 1 -p boost_usr_prod -A tra24_hckunitn  --reservation=s_tra_hckunitn -t 00:05:00 --gres=gpu:1 <your_command_here>
 
 # "Batch script"
 sbatch slurm_script.slurm
