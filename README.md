@@ -14,7 +14,6 @@ This project contains an implementation of all the necessary components as well 
 
 A **copy** of OpenMP source (`acc_src/`) that you can work on.
 
-## --
 # Things to do when offload the code on Leonardo system 
 
 ## Load the NVHPC compiler, compile your code with: 
@@ -24,6 +23,20 @@ make -f makefile.acc acc_bin/vit.exe
 ```
 
 ## After compiling code: run and analysis with nsight system
+
+## Setup Python venv
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install numpy
+```
+
+### Having trouble running scripts?
+Make sure they are executable
+
+```
+chmod +x <your_script>
+```
 
 ## To run the code and nsys profile:
 IMPORTANT: you shall not run these commands directly.
@@ -59,12 +72,12 @@ or
 
 C++ single-threaded serial implementation:
 ```
-make bin/vit.exe
+make -f makefile.acc bin/vit.exe
 ```
 
 OpenMP parallel implementation:
 ```
-make omp_bin/vit.exe
+make -f makefile.acc omp_bin/vit.exe
 ```
 
 Clean the folder from all compiled file:

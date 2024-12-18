@@ -37,8 +37,8 @@ if [ ! -d $DTASET_FOLDER ]; then
 fi
 
 # Check if executable is available
-if [ ! -f "acc_bin/vit.exe" ]; then
-    echo Error: missing acc_bin/vit.exe file!
+if [ ! -f "bin/vit.exe" ]; then
+    echo Error: missing omp_bin/vit.exe file!
     echo Run compile.sh script
     exit 1
 fi
@@ -61,12 +61,12 @@ if $PROFILE; then
     # Loop over dataset
     for ((i=0; i<$DTASET_DIM; i++)); do
         # Run the executable with nsys profiling, store the output in the PROFILE_FOLDER with a unique name
-        nsys profile --output=$PROFILE_FOLDER/profile_${TIMESTAMP}_$i.nsys-rep ./acc_bin/vit.exe $MODEL_PATH $DTASET_FOLDER/pic_$i.cpic $CPP_OUT_FOLDER/prd_$i.cprd $MEASURES_FOLDER/cpp.csv
+        nsys profile --output=$PROFILE_FOLDER/profile_${TIMESTAMP}_$i.nsys-rep ./bin/vit.exe $MODEL_PATH $DTASET_FOLDER/pic_$i.cpic $CPP_OUT_FOLDER/prd_$i.cprd $MEASURES_FOLDER/cpp.csv
     done
 else
     # Without profiling, just run the normal execution
     for ((i=0; i<$DTASET_DIM; i++)); do
-        ./acc_bin/vit.exe $MODEL_PATH $DTASET_FOLDER/pic_$i.cpic $CPP_OUT_FOLDER/prd_$i.cprd $MEASURES_FOLDER/cpp.csv
+        ./bin/vit.exe $MODEL_PATH $DTASET_FOLDER/pic_$i.cpic $CPP_OUT_FOLDER/prd_$i.cprd $MEASURES_FOLDER/cpp.csv
     done
 fi
 
