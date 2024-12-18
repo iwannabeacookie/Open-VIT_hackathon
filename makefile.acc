@@ -30,7 +30,7 @@ TEST_OBJ_FOLDER := test_bin/obj
 TEST_SRC_FOLDER := test_src
 
 # All target (with optional OpenMP and OpenACC executables)
-all: vit vit_omp vit_acc
+all: $(BIN_FOLDER)/vit.exe $(OMP_BIN_FOLDER)/vit.exe $(ACC_BIN_FOLDER)/vit.exe
 
 # Clean build
 clean:
