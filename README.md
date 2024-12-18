@@ -25,12 +25,25 @@ make -f makefile.acc acc_bin/vit.exe
 
 ## After compiling code: run and analysis with nsight system
 
-## To run nsys profile:
+## To run the code and nsys profile:
+IMPORTANT: you shall not run these commands directly.
+
 ```
 - Serial:  ./run_cpp_nsys.sh --profile 
 - Openmp:  ./run_omp_nsys.sh --profile
 - Openacc: ./run_acc_nsys.sh --profile
 ```
+
+To run properly, you must first request resources via SLURM. There are two ways to do so:
+```
+# "Inline"
+srun -N 1 -p boost_usr_prod -A tra24_hckunitn  --reservation=s_tra_hckunitn -t 00:05:00 --gres=gpu:1 run_acc_nsys.sh --profile <your_command_here>
+
+
+# "Batch script"
+sbatch slurm_script.slurm
+```
+In the second case, stdout and err are saved to files. Look at the script.
 
 ## Download NVIDIA Nsight Systems on your preferred laptop:
 
