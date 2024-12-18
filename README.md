@@ -12,6 +12,35 @@ This project contains an implementation of all the necessary components as well 
 - Files for individual component testing (`test_src/`)
 - Scripts for easy benchmarking (`params.sh` `run_cpp.sh` `run_omp.sh` `elaborate.sh`)
 
+## --
+# Things to do when offload the code on Leonardo system 
+
+## Load the NVHPC compiler, compile your code with: 
+```
+module load nvhpc/24.3
+make -f makefile.acc acc_bin/vit.exe
+```
+
+## After compiling code: run and analysis with nsight system
+
+## To run nsys profile:
+```
+- Serial:  ./run_cpp_nsys.sh --profile 
+- Openmp:  ./run_omp_nsys.sh --profile
+- Openacc: ./run_acc_nsys.sh --profile
+```
+
+## Download NVIDIA Nsight Systems on your preferred laptop:
+
+[Click here](https://developer.nvidia.com/nsight-systems/get-started)
+
+## Download the report on your local system 
+```
+./down.sh <account> <sys> <path> [exclude]
+or
+./down.sh -h
+```
+
 ## How to Compile
 
 C++ single-threaded serial implementation:
@@ -55,10 +84,6 @@ You can use two scripts to easily automate this process (they both rely on `para
 bash run_cpp.sh
 bash run_omp.sh
 ```
-
-## How to Run on Leonardo
-
-TODO
 
 ## Performance Analysis
 
