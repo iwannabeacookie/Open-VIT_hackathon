@@ -12,6 +12,8 @@ This project contains an implementation of all the necessary components as well 
 - Files for individual component testing (`test_src/`)
 - Scripts for easy benchmarking (`params.sh` `run_cpp.sh` `run_omp.sh` `elaborate.sh`)
 
+A **copy** of OpenMP source (`acc_src/`) that you can work on.
+
 ## --
 # Things to do when offload the code on Leonardo system 
 
