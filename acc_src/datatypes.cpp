@@ -27,7 +27,8 @@ RowVector::RowVector(vit_size _DIM) {
 RowVector::RowVector(vit_float* _data, vit_size data_dim) {
     DIM = data_dim;
     data = new vit_float[data_dim];
-    #pragma omp parallel for shared(data_dim,data,_data) schedule(static)
+    // #pragma omp parallel for shared(data_dim,data,_data) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<data_dim;++i) {
         data[i] = _data[i];
     }
@@ -64,7 +65,8 @@ RowVector RowVector::operator+ (const RowVector& v) const {
     assert(this->DIM == v.DIM);
     RowVector res(this->DIM);
 
-    #pragma omp parallel for shared(DIM,res,data,v) schedule(static)
+    // #pragma omp parallel for shared(DIM,res,data,v) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<this->DIM;++i) {
         res.data[i] = this->data[i] + v.data[i];
     }
@@ -75,7 +77,8 @@ RowVector RowVector::operator+ (const RowVector& v) const {
 RowVector& RowVector::operator+= (const RowVector& v) {
     assert(this->DIM == v.DIM);
 
-    #pragma omp parallel for shared(DIM,data,v) schedule(static)
+    // #pragma omp parallel for shared(DIM,data,v) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<this->DIM;++i) {
         this->data[i] += v.data[i];
     }
@@ -156,7 +159,8 @@ Matrix::Matrix(vit_float* _data, vit_size data_dim, vit_size _ROWS, vit_size _CO
     ROWS = _ROWS;
     COLS = _COLS;
     data = new vit_float[data_dim];
-    #pragma omp parallel for shared(data_dim,data,_data) schedule(static)
+    // #pragma omp parallel for shared(data_dim,data,_data) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<data_dim;++i) {
         data[i] = _data[i];
     }
@@ -166,7 +170,8 @@ Matrix::Matrix(vit_float** _data, vit_size _ROWS, vit_size _COLS) {
     ROWS = _ROWS;
     COLS = _COLS;
     data = new vit_float[_ROWS*_COLS];
-    #pragma omp parallel for collapse(2) shared(_ROWS,_COLS,data,_data) schedule(static)
+    // #pragma omp parallel for collapse(2) shared(_ROWS,_COLS,data,_data) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<_ROWS;++i) {
         for (int j=0;j<_COLS;++j) {
             data[j + (i*_COLS)] = _data[i][j];
@@ -210,7 +215,8 @@ Matrix Matrix::operator+ (const Matrix& m) const {
     assert(this->COLS == m.COLS);
     Matrix res(this->ROWS, this->COLS);
 
-    #pragma omp parallel for shared(ROWS,COLS,res,data,m) schedule(static)
+    // #pragma omp parallel for shared(ROWS,COLS,res,data,m) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<this->ROWS * this->COLS;++i) {
         res.data[i] = this->data[i] + m.data[i];
     }
@@ -222,7 +228,8 @@ Matrix& Matrix::operator+= (const Matrix& m) {
     assert(this->ROWS == m.ROWS);
     assert(this->COLS == m.COLS);
 
-    #pragma omp parallel for shared(ROWS,COLS,data,m) schedule(static)
+    // #pragma omp parallel for shared(ROWS,COLS,data,m) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<this->ROWS * this->COLS;++i) {
         this->data[i] += m.data[i];
     }
@@ -315,7 +322,8 @@ Tensor::Tensor(vit_float* _data, vit_size data_dim, vit_size _B, vit_size _N, vi
     N = _N;
     C = _C;
     data = new vit_float[data_dim];
-    #pragma omp parallel for shared(data_dim,data,_data) schedule(static)
+    // #pragma omp parallel for shared(data_dim,data,_data) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<data_dim;++i) {
         data[i] = _data[i];
     }
@@ -326,7 +334,8 @@ Tensor::Tensor(vit_float*** _data, vit_size _B, vit_size _N, vit_size _C) {
     N = _N;
     C = _C;
     data = new vit_float[_B*_N*_C];
-    #pragma omp parallel for collapse(3) shared(_B,_N,_C,data,_data) schedule(static)
+    // #pragma omp parallel for collapse(3) shared(_B,_N,_C,data,_data) schedule(static)
+    #pragma acc kernels loop independent
     for (int b=0;b<_B;++b) {
         for (int n=0;n<_N;++n) {
             for (int c=0;c<_C;++c) {
@@ -377,7 +386,8 @@ Tensor Tensor::operator+ (const Tensor& t) const {
     assert(this->C == t.C);
     Tensor res(this->B, this->N, this->C);
 
-    #pragma omp parallel for shared(B,N,C,res,data,t) schedule(static)
+    // #pragma omp parallel for shared(B,N,C,res,data,t) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<this->B * this->N * this->C;++i) {
         res.data[i] = this->data[i] + t.data[i];
     }
@@ -390,7 +400,8 @@ Tensor& Tensor::operator+= (const Tensor& t) {
     assert(this->N == t.N);
     assert(this->C == t.C);
 
-    #pragma omp parallel for shared(B,N,C,data,t) schedule(static)
+    // #pragma omp parallel for shared(B,N,C,data,t) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<this->B * this->N * this->C;++i) {
         this->data[i] += t.data[i];
     }
@@ -436,7 +447,8 @@ void Tensor::copy_tensor(const Tensor& t) {
         this->data = new vit_float[dim];
     }
 
-    #pragma omp parallel for shared(dim, data, t) schedule(static)
+    // #pragma omp parallel for shared(dim, data, t) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<dim;++i) {
         this->data[i] = t.data[i];
     }
@@ -590,7 +602,8 @@ void PictureBatch::flatten_to_tensor(Tensor& t) const {
     Tensor x(this->B, this->H * this->W, this->C);
 
     vit_float val;
-    #pragma omp parallel for collapse(4) private(val) shared(B,C,H,W,x) schedule(static)
+    // #pragma omp parallel for collapse(4) private(val) shared(B,C,H,W,x) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<this->B;++i) {
         for (int j=0;j<this->C;++j) {
             for (int k=0;k<this->H;++k) {
@@ -612,7 +625,8 @@ void PictureBatch::get_pad(PictureBatch& pic, vit_size new_h, vit_size new_w) co
     PictureBatch p(this->B, this->C, new_h, new_w);
 
     vit_float val;
-    #pragma omp parallel for collapse(4) private(val) shared(B,C,H,W,new_h,new_w,p) schedule(static)
+    // #pragma omp parallel for collapse(4) private(val) shared(B,C,H,W,new_h,new_w,p) schedule(static)
+    #pragma acc kernels loop independent
     for (int i=0;i<this->B;++i) {
         for (int j=0;j<this->C;++j) {
             for (int k=0;k<new_h;++k) {
@@ -722,7 +736,8 @@ PredictionBatch::PredictionBatch(const Tensor& t) {
     vit_size max_val_index;
     vit_float cumulative;
 
-    #pragma omp parallel for private(val, max_val, max_val_index, cumulative) shared(t,B,CLS,prob_matrix,classes,prob) schedule(dynamic)
+    // #pragma omp parallel for private(val, max_val, max_val_index, cumulative) shared(t,B,CLS,prob_matrix,classes,prob) schedule(dynamic)
+    #pragma acc kernels loop independent
     for(int i=0;i<B;++i) {
         max_val = std::exp( t.at(i,0,0) );
         max_val_index = 0;
