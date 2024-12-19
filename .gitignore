@@ -4,6 +4,9 @@
 /omp_obj
 /omp_bin
 
+/acc_obj
+/acc_bin
+
 /test_obj
 /test_bin
 
@@ -11,3 +14,4 @@
 /out_comparison
 
 .vscode
+/.venv

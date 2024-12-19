@@ -1,0 +1,4 @@
+Analysis of measures/acc.csv:
+   Number of batches: 0
+   Number of pictures: 0
+   Total time to analyze the dataset: 0.0
