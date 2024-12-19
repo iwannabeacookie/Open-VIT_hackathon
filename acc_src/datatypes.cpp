@@ -87,6 +87,7 @@ vit_size RowVector::get_DIM() const {
     return DIM;
 }
 
+#pragma acc routine seq
 vit_float RowVector::at(vit_size i) const {
     assert(i<DIM);
     return data[i];
@@ -630,6 +631,7 @@ void PictureBatch::get_pad(PictureBatch& pic, vit_size new_h, vit_size new_w) co
     pic = std::move(p);
 }
 
+#pragma acc routine seq
 void PictureBatch::set(vit_size b, vit_size c, vit_size h, vit_size w, vit_float val) {
     assert(b<B);
     assert(c<C);
