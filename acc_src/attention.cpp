@@ -1,4 +1,4 @@
-#define _OPENMP
+// #define _OPENMP
 #ifdef _OPENMP
 #include <omp.h>
 
