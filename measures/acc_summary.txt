@@ -32,3 +32,29 @@ Analysis of measures/acc.csv:
       Head: 0.000209821875 s
    Average store time per single prediction : 0.00012495 s
 
+Analysis of measures/acc.csv:
+   Number of batches: 1
+   Number of pictures: 16
+   Total time to analyze the dataset: 23.54565824
+   Average model load time: 0.0848344 s
+
+   Average batch load time: 0.00104258 s
+   Average foreward time per batch: 23.458091630000002 s
+      Patch Embed: 0.141986 s
+      Position Embed: 0.0010455 s
+      Attention: 1.151465 s/block
+      MLP: 1.7622487500000004 s/block
+      Pool: 0.00211841 s
+      Head: 0.00323172 s
+   Average store time per prediction batch: 0.00168963 s
+
+   Average picture load time: 6.516125e-05 s
+   Average foreward time per picture: 1.4661307268750001 s
+      Patch Embed: 0.008874125 s
+      Position Embed: 6.534375e-05 s
+      Attention: 0.0719665625 s/block
+      MLP: 0.11014054687500002 s/block
+      Pool: 0.000132400625 s
+      Head: 0.0002019825 s
+   Average store time per single prediction : 0.000105601875 s
+
