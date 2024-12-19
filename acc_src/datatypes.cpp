@@ -1,3 +1,4 @@
+#define _OPENMP
 #ifdef _OPENMP
 #include <omp.h>
 
@@ -560,18 +561,22 @@ vit_size PictureBatch::get_B() const {
     return B;
 }
 
+#pragma acc routine seq
 vit_size PictureBatch::get_C() const {
     return C;
 }
 
+#pragma acc routine seq
 vit_size PictureBatch::get_H() const {
     return H;
 }
 
+#pragma acc routine seq
 vit_size PictureBatch::get_W() const {
     return W;
 }
 
+#pragma acc routine seq
 vit_float PictureBatch::at(vit_size b, vit_size c, vit_size h, vit_size w) const {
     assert(b<B);
     assert(c<C);
