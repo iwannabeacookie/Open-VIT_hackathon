@@ -146,7 +146,7 @@ void Conv2d::forward(const PictureBatch& x_in, PictureBatch& x_out) const {
     PictureBatch y(x_in.get_B(), out_channels, out_h, out_w);
 
     vit_float val;
-    #pragma acc parallel loop collapse(4) present(x_in, kernel, bias, y)
+    #pragma acc kernels loop independent
     for (int batch=0;batch<y.get_B();++batch) {
         for (int y_c=0;y_c<out_channels;++y_c) {
             for (int y_h=0;y_h<out_h;++y_h) {
