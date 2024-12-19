@@ -19,7 +19,7 @@ A **copy** of OpenMP source (`acc_src/`) that you can work on.
 ## Load the NVHPC compiler, compile your code with: 
 ```
 module load nvhpc/24.3 gcc
-make -f makefile.acc acc_bin/vit.exe
+make acc_bin/vit.exe
 ```
 
 ## After compiling code: run and analysis with nsight system
@@ -68,16 +68,16 @@ or
 ./down.sh -h
 ```
 
-## How to Compile
+## How to Compile (Serial and OpenMP)
 
 C++ single-threaded serial implementation:
 ```
-make -f makefile.acc bin/vit.exe
+make bin/vit.exe
 ```
 
 OpenMP parallel implementation:
 ```
-make -f makefile.acc omp_bin/vit.exe
+make omp_bin/vit.exe
 ```
 
 Clean the folder from all compiled file:
