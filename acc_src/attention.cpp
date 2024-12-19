@@ -1,3 +1,4 @@
+#define _OPENMP
 #ifdef _OPENMP
 #include <omp.h>
 
@@ -191,7 +192,8 @@ void Attention::multi_head_attention(
 
     vit_float val;
     vit_float cumulative;
-    #pragma omp parallel for collapse(2) private(val, cumulative) shared(y,num_heads,N,_head_dim,query,key,_scale,qk,value) schedule(dynamic)
+    // #pragma omp parallel for collapse(2) private(val, cumulative) shared(y,num_heads,N,_head_dim,query,key,_scale,qk,value) schedule(dynamic)
+    #pragma acc parallel loop collapse(2) present(y,num_heads,N,_head_dim,query,key,_scale,qk,value)
     for (int batch=0;batch<y.get_B();++batch) {
         for (int nh=0;nh<num_heads;++nh) {
 
