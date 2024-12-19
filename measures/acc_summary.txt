@@ -2,3 +2,33 @@ Analysis of measures/acc.csv:
    Number of batches: 0
    Number of pictures: 0
    Total time to analyze the dataset: 0.0
+Analysis of measures/acc.csv:
+   Number of batches: 0
+   Number of pictures: 0
+   Total time to analyze the dataset: 0.0
+Analysis of measures/acc.csv:
+   Number of batches: 1
+   Number of pictures: 16
+   Total time to analyze the dataset: 24.465232466
+   Average model load time: 0.0874628 s
+
+   Average batch load time: 0.00095084 s
+   Average foreward time per batch: 24.374819625999997 s
+      Patch Embed: 1.46805 s
+      Position Embed: 0.000836906 s
+      Attention: 1.1508924999999999 s/block
+      MLP: 1.71167125 s/block
+      Pool: 0.00206557 s
+      Head: 0.00335715 s
+   Average store time per prediction batch: 0.0019992 s
+
+   Average picture load time: 5.94275e-05 s
+   Average foreward time per picture: 1.5234262266249998 s
+      Patch Embed: 0.091753125 s
+      Position Embed: 5.2306625e-05 s
+      Attention: 0.07193078124999999 s/block
+      MLP: 0.106979453125 s/block
+      Pool: 0.000129098125 s
+      Head: 0.000209821875 s
+   Average store time per single prediction : 0.00012495 s
+
