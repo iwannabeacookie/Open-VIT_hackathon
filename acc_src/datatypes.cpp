@@ -410,6 +410,7 @@ vit_size Tensor::get_C() const {
     return C;
 }
 
+#pragma acc routine seq
 vit_float Tensor::at(vit_size b, vit_size n, vit_size c) const {
     assert(b<B);
     assert(n<N);
@@ -417,6 +418,7 @@ vit_float Tensor::at(vit_size b, vit_size n, vit_size c) const {
     return data[c + (n*C) + (b*N*C)];
 }
 
+#pragma acc routine seq
 void Tensor::set(vit_size b, vit_size n, vit_size c, vit_float val) {
     assert(b<B);
     assert(n<N);
