@@ -1,4 +1,4 @@
-#define _OPENMP
+// #define _OPENMP
 #ifdef _OPENMP
 #include <omp.h>
 
@@ -237,6 +237,7 @@ Matrix& Matrix::operator+= (const Matrix& m) {
     return *this;
 }
 
+#pragma acc routine seq
 vit_size Matrix::get_ROWS() const {
     return ROWS;
 }
@@ -245,6 +246,7 @@ vit_size Matrix::get_COLS() const {
     return COLS;
 }
 
+#pragma acc routine seq
 vit_float Matrix::at(vit_size i, vit_size j) const {
     assert(i<ROWS);
     assert(j<COLS);
@@ -413,10 +415,12 @@ vit_size Tensor::get_B() const {
     return B;
 }
 
+#pragma acc routine seq
 vit_size Tensor::get_N() const {
     return N;
 }
 
+#pragma acc routine seq
 vit_size Tensor::get_C() const {
     return C;
 }
