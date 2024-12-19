@@ -18,7 +18,7 @@ A **copy** of OpenMP source (`acc_src/`) that you can work on.
 
 ## Load the NVHPC compiler, compile your code with: 
 ```
-module load nvhpc/24.3
+module load nvhpc/24.3 gcc
 make -f makefile.acc acc_bin/vit.exe
 ```
 

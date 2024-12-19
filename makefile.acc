@@ -9,7 +9,7 @@ CUDA_LIB_PATH=$NVHPC_INCLUDE_PATH/cuda/12.3/targets/x86_64-linux/lib
 export LD_LIBRARY_PATH=$CUDA_LIB_PATH:$LD_LIBRARY_PATH
 
 CXXFLAGS := -std=c++11 -O3 -I$(CUDA_INCLUDE_PATH)
-OMPFLAGS := -mp -c -I$(CUDA_INCLUDE_PATH)
+OMPFLAGS := -fopenmp -mp -c -I$(CUDA_INCLUDE_PATH)
 
 # OpenACC / GPU Specific Compiler and Flags
 ACCFLAGS := -mp -acc -gpu=cc80,managed,cuda12.3,lineinfo -Minfo=acc  ###-Minline=1000

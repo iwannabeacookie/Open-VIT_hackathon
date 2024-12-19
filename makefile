@@ -1,7 +1,15 @@
-CC := g++
-CFLAGS := -std=c++11 -O3
-OMPFLAGS := -fopenmp
+# Load NVHPC compiler
+CC := nvc++
 
+NVHPC_INCLUDE_PATH := /leonardo/prod/spack/5.2/install/0.21/linux-rhel8-icelake/gcc-8.5.0/nvhpc-24.3-v63z4inohb4ywjeggzhlhiuvuoejr2le/Linux_x86_64/24.3
+CUDA_INCLUDE_PATH := $(NVHPC_INCLUDE_PATH)/cuda/include
+
+CFLAGS := -std=c++11 -O3 -I$(CUDA_INCLUDE_PATH)
+OMPFLAGS := -mp 
+
+##-acc -gpu=cc80,managed,lineinfo -Minfo=accel,all
+
+# Bin, Obj, and Src Folders
 BIN_FOLDER := bin
 OBJ_FOLDER := bin/obj
 SRC_FOLDER := src
@@ -14,16 +22,13 @@ TEST_BIN_FOLDER := test_bin
 TEST_OBJ_FOLDER := test_bin/obj
 TEST_SRC_FOLDER := test_src
 
-
-
+# Compilation Targets
 all : vit
 
 clean :
 	rm -rf ./$(OBJ_FOLDER) ./$(BIN_FOLDER) ./$(OMP_OBJ_FOLDER) ./$(OMP_BIN_FOLDER) \
 		   ./$(TEST_OBJ_FOLDER) ./$(TEST_BIN_FOLDER) \
 		   ./out_comparison ./test_files
-
-
 
 # OBJs
 $(OBJ_FOLDER)/datatypes.o \
@@ -57,9 +62,7 @@ $(OBJ_FOLDER)/main.o
 	mkdir -p $(BIN_FOLDER)
 	$(CC) $(CFLAGS) $^ -o $@
 
-
-
-# OMP OBJs
+# OMP OBJs with OpenACC
 $(OMP_OBJ_FOLDER)/datatypes.o \
 $(OMP_OBJ_FOLDER)/modules.o \
 $(OMP_OBJ_FOLDER)/conv2d.o \
@@ -70,7 +73,7 @@ $(OMP_OBJ_FOLDER)/vision_transformer.o \
 	mkdir -p $(OMP_OBJ_FOLDER)
 	$(CC) -c $(CFLAGS) $(OMPFLAGS) $^ -o $@
 
-# OMP Executables
+# OMP Executables with OpenACC
 $(OMP_BIN_FOLDER)/vit.exe : \
 \
 $(OMP_OBJ_FOLDER)/datatypes.o \
@@ -85,8 +88,6 @@ $(OBJ_FOLDER)/utils.o \
 $(OBJ_FOLDER)/main.o
 	mkdir -p $(OMP_BIN_FOLDER)
 	$(CC) $(CFLAGS) $(OMPFLAGS) $^ -o $@
-
-
 
 # Test OBJs
 $(TEST_OBJ_FOLDER)/test_datatypes.o \
