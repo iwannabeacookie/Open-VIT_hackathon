@@ -23,7 +23,7 @@ TEST_OBJ_FOLDER := test_bin/obj
 TEST_SRC_FOLDER := test_src
 
 # Compilation Targets
-all : vit
+all : $(BIN_FOLDER)/vit.exe $(OMP_BIN_FOLDER)/vit.exe
 
 clean :
 	rm -rf ./$(OBJ_FOLDER) ./$(BIN_FOLDER) ./$(OMP_OBJ_FOLDER) ./$(OMP_BIN_FOLDER) \

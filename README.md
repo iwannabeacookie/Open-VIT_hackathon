@@ -19,7 +19,7 @@ A **copy** of OpenMP source (`acc_src/`) that you can work on.
 ## Load the NVHPC compiler, compile your code with: 
 ```
 module load nvhpc/24.3 gcc
-make acc_bin/vit.exe
+make -f makefile.acc acc_bin/vit.exe
 ```
 
 ## After compiling code: run and analysis with nsight system
